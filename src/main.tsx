@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './Pages/Authorization_page'
+import './tailwind.css'
+import App from "./Index"; 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
