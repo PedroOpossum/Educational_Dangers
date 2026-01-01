@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-function Login() {
+import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import { auth, googleProvider} from "../firebase";
+
+function Login()
+{
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,16 +16,25 @@ function Login() {
           // Signup logic to be implemented
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            setMsg("Account created successfully!");
+            setMsg("Login in Successful!");
         }
         catch (error: any) {
             setMsg(error.message);
         }
     }
 
+    const handleGoogleLogin = async () => {
+        try {
+          const result = await signInWithPopup(auth, googleProvider);
+          setMsg("Google Login in Successful!");
+        } catch (error: any) {
+            setMsg(error.message);
+        }
+    };
+
   return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-[#ffca748f]">
+      <div className="w-full max-w-md bg-[#ffba4a44] p-8 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Login
         </h2>
@@ -72,6 +83,13 @@ function Login() {
             Sign up
           </Link>
         </p>
+
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full mt-4 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
+        >
+          Sign In with Google
+        </button> 
       </div>
     </div>
   );

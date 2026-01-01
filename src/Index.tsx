@@ -5,6 +5,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import Login from "./Components/Login";
 import Signup from "./Components/Sign_Up";
 import Dashboard from "./Components/Dashboard";
+import Main_Menu from "./Components/Main_Menu";
+
 
 function App() {
 
@@ -19,7 +21,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Main_Menu/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
