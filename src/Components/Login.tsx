@@ -1,6 +1,26 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 function Login() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+
+  
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+          // Signup logic to be implemented
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            setMsg("Account created successfully!");
+        }
+        catch (error: any) {
+            setMsg(error.message);
+        }
+    }
+
   return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
@@ -8,7 +28,12 @@ function Login() {
           Login
         </h2>
 
-        <form className="space-y-4">
+        {msg && (
+          <p className="mb-4 text-center text-sm text-red-600">{msg}</p>
+        )}
+
+
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
@@ -16,6 +41,7 @@ function Login() {
             <input
               type="email"
               placeholder="you@example.com"
+              onChange = {(e) => setEmail(e.target.value)}
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
@@ -27,6 +53,7 @@ function Login() {
             <input
               type="password"
               placeholder="••••••••"
+              onChange = {(e) => setPassword(e.target.value)}
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
