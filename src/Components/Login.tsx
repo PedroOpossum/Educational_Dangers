@@ -16,7 +16,13 @@ function Login()
         e.preventDefault();
           // Signup logic to be implemented
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const Usercredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = Usercredential.user;
+            if(!user.emailVerified)
+            {
+                setMsg("Please verify your email before logging in.");
+                return;
+            }
             Navigate('/dashboard');
 
         }
