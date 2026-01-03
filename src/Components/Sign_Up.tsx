@@ -4,11 +4,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 function Signup() {
-    
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [msg, setMsg] = useState("");
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
     const handleSignIn = async (e: React.FormEvent) => {
         e.preventDefault();

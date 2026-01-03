@@ -24,7 +24,7 @@ function App() {
       <Route path="/" element={<Main_Menu/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+      <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
     </Routes>
   );
 }

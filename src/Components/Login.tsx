@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
 import { auth, googleProvider} from "../firebase";
 
@@ -9,14 +9,16 @@ function Login()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
-
   
+  const Navigate = useNavigate();
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
           // Signup logic to be implemented
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            setMsg("Login in Successful!");
+            Navigate('/dashboard');
+
         }
         catch (error: any) {
             setMsg(error.message);
@@ -25,8 +27,9 @@ function Login()
 
     const handleGoogleLogin = async () => {
         try {
-          const result = await signInWithPopup(auth, googleProvider);
+          await signInWithPopup(auth, googleProvider);
           setMsg("Google Login in Successful!");
+          Navigate('/dashboard');
         } catch (error: any) {
             setMsg(error.message);
         }
@@ -86,9 +89,11 @@ function Login()
 
         <button
           onClick={handleGoogleLogin}
-          className="w-full mt-4 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
+          className="px-4 py-2 my-8 w-full align-middle justify-center  flex items-center gap-2 bg-white text-blackborder border-slate-300 rounded-lg hover:bg-slate-200 hover:border-slate-600 transition-colors duration-150" 
         >
-          Sign In with Google
+        <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
+        <span>Login with Google</span>
+          
         </button> 
       </div>
     </div>
