@@ -43,7 +43,20 @@ function Login()
 
   return (
         <div className="min-h-screen flex items-center justify-center bg-[#ffca748f]">
-      <div className="w-full max-w-md bg-[#ffba4a44] p-8 rounded-xl shadow-lg">
+
+        <div className="left-0 top-1/2 grid grid-cols-3 gap-y-20 gap-x-20 absolute transform -translate-y-1/2 ml-30">
+            {Array.from({ length: 9 }).map((_, i) => (
+            <span key={i} className="w-2 h-2 bg-black rounded-full" />  ))}
+        </div>
+
+        
+        <div className="right-0 top-1/2 grid grid-cols-3 gap-y-20 gap-x-20 absolute transform -translate-y-1/2 mr-30">
+            {Array.from({ length: 9 }).map((_, i) => (
+            <span key={i} className="w-2 h-2 bg-black rounded-full" />  ))}
+        </div>
+
+      <div className="w-full bg-[#ffba4a44] p-8 rounded-xl shadow-lg">
+        <div className="w-full max-w-3xl mx-auto rounded-3xl p-8 bg-[#ffffffa4] ">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Login
         </h2>
@@ -101,6 +114,7 @@ function Login()
         <span>Login with Google</span>
           
         </button> 
+        </div>
       </div>
     </div>
   );
